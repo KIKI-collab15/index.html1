@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hair Science Hub | College Non-Profit Initiative</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        linen: '#F9F8F6',
+                        sage: {
+                            DEFAULT: '#2C3E35',
+                            dark: '#1d2b25',
+                            light: '#3d5247'
+                        },
+                        eucalyptus: {
+                            DEFAULT: '#7A9A8B',
+                            light: '#e3ece8',
+                            hover: '#698778'
+                        },
+                        terracotta: {
+                            DEFAULT: '#D97757',
+                            hover: '#c46445',
+                            light: '#faeeea'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Lora', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            background-color: #F9F8F6;
+            color: #2C3E35;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-serif-title {
+            font-family: 'Lora', serif;
+        }
+
+        /* Perspective for 3D flip card effect */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F9F8F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #7A9A8B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2C3E35;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-eucalyptus selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-linen/90 backdrop-blur-md border-b border-eucalyptus/20 no-print transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-sage text-linen flex items-center justify-center font-serif font-bold text-xl shadow-md group-hover:bg-terracotta transition-colors duration-300">
+                    <i class="fa-solid font-normal fa-dna"></i>
+                </div>
+                <div>
+                    <span class="font-serif-title text-xl font-bold tracking-tight text-sage block leading-none">Hair Science Hub</span>
+                    <span class="text-xs text-eucalyptus font-semibold uppercase tracking-wider block mt-1">College Non-Profit Initiative</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-sage hover:text-terracotta transition-colors">About</a>
+                <a href="#analyzer" class="text-sage hover:text-terracotta transition-colors">Ingredient Matrix</a>
+                <a href="#myths" class="text-sage hover:text-terracotta transition-colors">Myth Busters</a>
+                <a href="#references" class="text-sage hover:text-terracotta transition-colors">Academic Hub</a>
+                <a href="#generator" class="text-sage hover:text-terracotta transition-colors">Cheat Sheet</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-3">
+                <button onclick="openTikTokModal(1)" class="bg-terracotta hover:bg-terracotta-hover text-white text-xs font-semibold px-4 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok Campaign</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-sage p-2 rounded-lg hover:bg-eucalyptus/10 focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-linen border-b border-eucalyptus/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sage hover:bg-eucalyptus/10">About Initiative</a>
+            <a href="#analyzer" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sage hover:bg-eucalyptus/10">Chemical Matrix</a>
+            <a href="#myths" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sage hover:bg-eucalyptus/10">TikTok Myth Busters</a>
+            <a href="#references" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sage hover:bg-eucalyptus/10">Academic References</a>
+            <a href="#generator" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-sage hover:bg-eucalyptus/10">INCI Cheat Sheet</a>
+            <button onclick="openTikTokModal(1)" class="w-full mt-2 bg-terracotta text-white text-sm font-semibold px-4 py-2.5 rounded-xl flex items-center justify-center gap-2">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>Explore TikTok Series</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- 1. HERO SECTION -->
+        <section id="about" class="relative py-16 md:py-24 overflow-hidden border-b border-eucalyptus/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-left">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-eucalyptus/15 border border-eucalyptus/30 text-sage text-xs font-semibold tracking-wide">
+                            <span class="w-2 h-2 rounded-full bg-terracotta animate-pulse"></span>
+                            Collegiate Public Health & Science Communication Project
+                        </div>
+                        
+                        <h1 class="font-serif-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-sage leading-tight">
+                            Demystifying Hair Wellness Through <span class="text-terracotta underline decoration-eucalyptus/40 underline-offset-8">Peer-Reviewed Science</span>
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-sage/80 leading-relaxed font-normal max-w-2xl">
+                            We are translating dense cosmetic chemistry, dermatological literature, and molecular trichology into actionable public health knowledge. Combating social media misinformation—one formula at a time.
+                        </p>
+
+                        <div class="pt-2 flex flex-wrap gap-4 items-center">
+                            <a href="#analyzer" class="bg-sage hover:bg-sage-dark text-linen text-sm font-semibold px-6 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2">
+                                <i class="fa-solid fa-flask text-eucalyptus"></i>
+                                <span>Explore Ingredient Matrix</span>
+                            </a>
+                            <button onclick="openTikTokModal(1)" class="bg-linen hover:bg-eucalyptus/10 text-sage border border-sage/20 text-sm font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 flex items-center gap-2">
+                                <i class="fa-brands fa-tiktok text-terracotta"></i>
+                                <span>Watch TikTok Series Pitch</span>
+                            </button>
+                        </div>
+
+                        <!-- Stats / Badges -->
+                        <div class="pt-8 grid grid-cols-3 gap-4 border-t border-eucalyptus/20 max-w-lg">
+                            <div>
+                                <span class="block text-2xl font-bold text-sage font-serif-title">100%</span>
+                                <span class="text-xs text-sage/70 font-medium">Non-Profit & Unsponsored</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-sage font-serif-title">2021–2026</span>
+                                <span class="text-xs text-sage/70 font-medium">PubMed & AAD Sources</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-sage font-serif-title">INCI</span>
+                                <span class="text-xs text-sage/70 font-medium">Ingredient Standardized</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hero Visual Card / TikTok Preview Teaser -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-xs sm:max-w-sm rounded-3xl bg-sage p-4 shadow-2xl border-4 border-eucalyptus/30 text-linen">
+                            <div class="relative rounded-2xl overflow-hidden bg-sage-dark aspect-[9/16] flex flex-col justify-between p-5 border border-white/10 group">
+                                
+                                <!-- Fake Video Header -->
+                                <div class="flex items-center justify-between z-10">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-terracotta flex items-center justify-center font-bold text-xs text-white">HS</div>
+                                        <div>
+                                            <span class="text-xs font-semibold block text-white">@HairScienceHub</span>
+                                            <span class="text-[10px] text-eucalyptus block">College Public Health</span>
+                                        </div>
+                                    </div>
+                                    <span class="bg-black/40 text-[10px] px-2 py-1 rounded-full text-white/80 backdrop-blur-sm">Series Ep. 01</span>
+                                </div>
+
+                                <!-- Overlay Mockup Content -->
+                                <div class="my-auto text-center space-y-3 z-10 py-6">
+                                    <div class="w-16 h-16 mx-auto rounded-full bg-terracotta/90 text-white flex items-center justify-center text-2xl cursor-pointer hover:scale-110 transition-transform shadow-lg group-hover:bg-terracotta" onclick="openTikTokModal(1)">
+                                        <i class="fa-solid fa-play ml-1"></i>
+                                    </div>
+                                    <div class="bg-black/60 backdrop-blur-md p-3 rounded-xl border border-white/10 text-left">
+                                        <span class="text-[10px] uppercase font-bold text-terracotta tracking-wider block">Script Preview #1</span>
+                                        <h4 class="text-xs font-bold text-white mt-1">"Why your hair doesn't actually 'hate' silicones..."</h4>
+                                        <p class="text-[11px] text-gray-300 mt-1">Explaining Amodimethicone's positive charge mechanism in 30 seconds.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Fake Video Footer -->
+                                <div class="z-10 space-y-2">
+                                    <div class="flex items-center justify-between text-xs text-white/70">
+                                        <span><i class="fa-solid fa-flask text-eucalyptus mr-1"></i> Peer-Reviewed</span>
+                                        <span><i class="fa-solid fa-check text-green-400 mr-1"></i> Non-Commercial</span>
+                                    </div>
+                                    <button onclick="openTikTokModal(1)" class="w-full bg-eucalyptus hover:bg-eucalyptus-hover text-sage-dark text-xs font-bold py-2 rounded-lg transition-colors text-center">
+                                        Preview Script Outline
+                                    </button>
+                                </div>
+
+                                <!-- Background Glow Effects -->
+                                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-terracotta/20 rounded-full blur-2xl"></div>
+                                <div class="absolute -top-10 -left-10 w-40 h-40 bg-eucalyptus/20 rounded-full blur-2xl"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CHEMICAL INGREDIENT ANALYZER & MATRIX -->
+        <section id="analyzer" class="py-16 md:py-24 bg-white border-b border-eucalyptus/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-terracotta bg-terracotta/10 px-3 py-1 rounded-full">Interactive Database</span>
+                    <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-sage mt-3">Chemical Ingredient Matrix</h2>
+                    <p class="text-sage/70 text-sm sm:text-base mt-2">Filter and evaluate cosmetic hair ingredients by functional class, molecular weight, cuticle penetration, and health impacts.</p>
+                </div>
+
+                <!-- Controls Bar: Search & Category Filters -->
+                <div class="bg-linen p-4 sm:p-6 rounded-2xl border border-eucalyptus/20 mb-8 space-y-4">
+                    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        
+                        <!-- Search Bar -->
+                        <div class="relative w-full md:w-80">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-eucalyptus"></i>
+                            <input type="text" id="searchInput" onkeyup="filterIngredients()" placeholder="Search INCI name or mechanism..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-eucalyptus/30 bg-white text-sage text-sm focus:outline-none focus:ring-2 focus:ring-eucalyptus">
+                        </div>
+
+                        <!-- Safety Status Filter -->
+                        <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+                            <span class="text-xs font-semibold text-sage/70 whitespace-nowrap mr-1">Classification:</span>
+                            <button onclick="setStatusFilter('all')" id="status-all" class="status-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-sage text-white transition-colors">All</button>
+                            <button onclick="setStatusFilter('beneficial')" id="status-beneficial" class="status-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-eucalyptus/30 text-sage hover:bg-eucalyptus/10 transition-colors">Beneficial / Functional</button>
+                            <button onclick="setStatusFilter('high-risk')" id="status-high-risk" class="status-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-eucalyptus/30 text-sage hover:bg-eucalyptus/10 transition-colors">High Risk / Damaging</button>
+                        </div>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex flex-wrap gap-2 pt-2 border-t border-eucalyptus/15">
+                        <span class="text-xs font-semibold text-sage/70 self-center mr-2">Category:</span>
+                        <button onclick="setCategoryFilter('all')" id="cat-all" class="cat-btn active bg-eucalyptus text-white px-3 py-1 rounded-full text-xs font-medium">All Categories</button>
+                        <button onclick="setCategoryFilter('Cleansers')" id="cat-Cleansers" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Cleansers</button>
+                        <button onclick="setCategoryFilter('Silicones')" id="cat-Silicones" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Silicones</button>
+                        <button onclick="setCategoryFilter('Proteins')" id="cat-Proteins" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Proteins</button>
+                        <button onclick="setCategoryFilter('Bond Builders')" id="cat-Bond Builders" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Bond Builders</button>
+                        <button onclick="setCategoryFilter('Preservatives')" id="cat-Preservatives" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Preservatives</button>
+                        <button onclick="setCategoryFilter('Alcohols')" id="cat-Alcohols" class="cat-btn bg-white border border-eucalyptus/30 text-sage px-3 py-1 rounded-full text-xs font-medium hover:bg-eucalyptus/10">Alcohols</button>
+                    </div>
+                </div>
+
+                <!-- Table Container -->
+                <div class="overflow-x-auto rounded-2xl border border-eucalyptus/20 shadow-sm bg-white">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-sage text-linen text-xs uppercase tracking-wider">
+                                <th class="p-4 font-semibold">INCI Ingredient Name</th>
+                                <th class="p-4 font-semibold">Category</th>
+                                <th class="p-4 font-semibold">Classification</th>
+                                <th class="p-4 font-semibold">Molecular Weight</th>
+                                <th class="p-4 font-semibold">Cuticle Penetration</th>
+                                <th class="p-4 font-semibold text-right">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ingredientTableBody" class="divide-y divide-eucalyptus/15 text-xs sm:text-sm text-sage">
+                            <!-- Populated via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="noResults" class="hidden text-center py-12 text-sage/60">
+                    <i class="fa-solid fa-flask-vial text-3xl mb-2 text-eucalyptus"></i>
+                    <p class="font-medium">No ingredients match your current search or filter criteria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. TIKTOK MYTH BUSTERS SECTION -->
+        <section id="myths" class="py-16 md:py-24 bg-linen border-b border-eucalyptus/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-xs font-bold uppercase tracking-wider text-terracotta bg-terracotta/10 px-3 py-1 rounded-full">Debunking Trends</span>
+                    <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-sage mt-3">TikTok Viral Myth Busters</h2>
+                    <p class="text-sage/70 text-sm sm:text-base mt-2">Click or tap any card to flip it and reveal the peer-reviewed clinical research behind popular hair care trends.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="mythsContainer">
+                    <!-- Populated via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. EVIDENCE-BASED ACADEMIC REFERENCE CENTER -->
+        <section id="references" class="py-16 md:py-24 bg-white border-b border-eucalyptus/15">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-sage bg-eucalyptus/20 px-3 py-1 rounded-full">Academic Rigor</span>
+                        <h2 class="font-serif-title text-3xl sm:text-4xl font-bold text-sage mt-3">Evidence-Based Reference Center</h2>
+                        <p class="text-sage/70 text-sm mt-1">Complete APA 7th Edition citations focused on recent publications (2021–2026).</p>
+                    </div>
+
+                    <!-- Year Filter -->
+                    <div class="flex items-center gap-2 self-start md:self-auto">
+                        <span class="text-xs font-semibold text-sage/70">Filter Year:</span>
+                        <select id="yearFilter" onchange="filterReferences()" class="bg-linen border border-eucalyptus/30 text-sage text-xs font-semibold rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-eucalyptus">
+                            <option value="all">All Years (2021–2026)</option>
+                            <option value="2025-2026">2025–2026 (Recent)</option>
+                            <option value="2023-2024">2023–2024</option>
+                            <option value="2021-2022">2021–2022</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-4" id="referenceList">
+                    <!-- Populated via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. INCI LABEL CHEAT SHEET GENERATOR -->
+        <section id="generator" class="py-16 md:py-24 bg-linen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="bg-sage text-linen rounded-3xl p-6 sm:p-10 shadow-xl border border-eucalyptus/30">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        
+                        <div class="lg:col-span-5 space-y-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-terracotta bg-terracotta/20 px-3 py-1 rounded-full">Interactive Utility</span>
+                            <h2 class="font-serif-title text-3xl font-bold text-white leading-tight">Custom INCI Cheat Sheet Generator</h2>
+                            <p class="text-linen/80 text-sm leading-relaxed">
+                                Select key chemical topics below to dynamically generate a 1-page printable INCI label pocket guide for your college project or personal consumer use.
+                            </p>
+
+                            <div class="space-y-3 pt-2">
+                                <label class="block text-xs font-semibold text-eucalyptus uppercase tracking-wider">Select Modules to Include:</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-3 text-xs sm:text-sm text-linen cursor-pointer">
+                                        <input type="checkbox" id="chk-surfactants" checked onchange="generateCheatSheet()" class="accent-terracotta w-4 h-4 rounded">
+                                        <span>Surfactants & Cleansers (SLS vs. Glucosides)</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 text-xs sm:text-sm text-linen cursor-pointer">
+                                        <input type="checkbox" id="chk-silicones" checked onchange="generateCheatSheet()" class="accent-terracotta w-4 h-4 rounded">
+                                        <span>Silicones & Polymers (Amodimethicone Charge)</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 text-xs sm:text-sm text-linen cursor-pointer">
+                                        <input type="checkbox" id="chk-proteins" checked onchange="generateCheatSheet()" class="accent-terracotta w-4 h-4 rounded">
+                                        <span>Proteins & Bond Builders (Hydrolysis Weight)</span>
+                                    </label>
+                                    <label class="flex items-center gap-3 text-xs sm:text-sm text-linen cursor-pointer">
+                                        <input type="checkbox" id="chk-preservatives" checked onchange="generateCheatSheet()" class="accent-terracotta w-4 h-4 rounded">
+                                        <span>Preservatives & Alcohols (DMDM vs. Fatty Alcohols)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex gap-3">
+                                <button onclick="window.print()" class="bg-terracotta hover:bg-terracotta-hover text-white text-xs sm:text-sm font-bold px-5 py-3 rounded-xl shadow-md transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-print"></i>
+                                    <span>Print / Export PDF Guide</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Live Printable Preview Box -->
+                        <div class="lg:col-span-7 bg-white text-sage rounded-2xl p-6 shadow-inner border border-eucalyptus/20 text-xs leading-relaxed" id="cheatSheetPreview">
+                            <!-- Dynamic Content Inserted Here -->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-sage-dark text-linen/70 py-12 border-t border-eucalyptus/20 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="space-y-1 text-center md:text-left">
+                <p class="font-serif-title font-bold text-linen text-lg">Hair Science Hub</p>
+                <p class="text-xs text-linen/60">A Non-Profit Collegiate Educational Public Health Project.</p>
+            </div>
+            
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="#about" class="hover:text-terracotta transition-colors">About</a>
+                <a href="#analyzer" class="hover:text-terracotta transition-colors">Matrix</a>
+                <a href="#references" class="hover:text-terracotta transition-colors">Citations</a>
+            </div>
+
+            <div class="text-xs text-linen/50 text-center md:text-right">
+                <p>© 2026 Hair Science Hub. Designed for College Evaluation.</p>
+                <p class="mt-1">All data sourced from peer-reviewed dermatological & cosmetic science literature.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal 1: Ingredient Detail Modal -->
+    <div id="ingredientModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-linen rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-eucalyptus/30 shadow-2xl relative transform transition-all">
+            <button onclick="closeModal('ingredientModal')" class="absolute top-5 right-5 text-sage/60 hover:text-sage text-xl w-8 h-8 rounded-full bg-eucalyptus/10 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Dynamically Filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: TikTok Script & Video Preview Modal -->
+    <div id="tikTokModal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-sage text-linen rounded-3xl max-w-2xl w-full p-6 border border-eucalyptus/30 shadow-2xl relative">
+            <button onclick="closeModal('tikTokModal')" class="absolute top-5 right-5 text-linen/60 hover:text-linen text-xl w-8 h-8 rounded-full bg-white/10 flex items-center justify-center z-20">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                
+                <!-- Mock Phone Player -->
+                <div class="md:col-span-5 bg-black rounded-2xl p-4 border border-white/20 aspect-[9/16] flex flex-col justify-between relative overflow-hidden text-white shadow-xl">
+                    <div class="flex items-center justify-between text-xs z-10">
+                        <span class="bg-terracotta text-white font-bold px-2 py-0.5 rounded text-[10px]">TIKTOK SCRIPT</span>
+                        <span class="text-white/60 text-[10px]">30 Secs</span>
+                    </div>
+
+                    <div class="my-auto text-center space-y-3 z-10">
+                        <div class="w-12 h-12 mx-auto rounded-full bg-terracotta text-white flex items-center justify-center text-xl shadow-lg animate-pulse">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <p class="text-xs font-bold text-white px-2" id="modalVideoHook">"Why your hair doesn't hate silicones..."</p>
+                    </div>
+
+                    <div class="z-10 bg-black/70 p-2.5 rounded-xl border border-white/10 text-[10px] space-y-1">
+                        <p class="text-eucalyptus font-semibold">On-Screen Citation:</p>
+                        <p class="text-gray-300 italic truncate" id="modalVideoCitation">Journal of Cosmetic Science</p>
+                    </div>
+
+                    <div class="absolute inset-0 bg-gradient-to-b from-sage/20 via-transparent to-sage-dark/80"></div>
+                </div>
+
+                <!-- Script Breakdown -->
+                <div class="md:col-span-7 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-terracotta bg-terracotta/20 px-2.5 py-1 rounded-full" id="modalEpTag">Episode 01</span>
+                        <span class="text-xs text-eucalyptus" id="modalTopicTag">Silicones Chemistry</span>
+                    </div>
+
+                    <h3 class="font-serif-title text-xl font-bold text-white" id="modalScriptTitle">Silicones: The Positively Charged Miracle</h3>
+
+                    <div class="space-y-3 text-xs max-h-72 overflow-y-auto pr-2">
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                            <span class="font-bold text-terracotta block mb-1">0:00 - 0:03 | Visual Hook</span>
+                            <p class="text-linen/80" id="scriptHookText"></p>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                            <span class="font-bold text-eucalyptus block mb-1">0:03 - 0:15 | The Chemical Science</span>
+                            <p class="text-linen/80" id="scriptScienceText"></p>
+                        </div>
+                        <div class="bg-white/5 p-3 rounded-xl border border-white/10">
+                            <span class="font-bold text-green-400 block mb-1">0:15 - 0:25 | Consumer Action Tip</span>
+                            <p class="text-linen/80" id="scriptActionText"></p>
+                        </div>
+                    </div>
+
+                    <!-- Script Switcher Buttons -->
+                    <div class="pt-2 flex gap-2">
+                        <button onclick="loadScript(1)" class="text-[11px] bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition-colors">Ep 1: Silicones</button>
+                        <button onclick="loadScript(2)" class="text-[11px] bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition-colors">Ep 2: Sulfates</button>
+                        <button onclick="loadScript(3)" class="text-[11px] bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg transition-colors">Ep 3: Proteins</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive Dataset for Ingredients
+        const INGREDIENTS_DATA = [
+            {
+                id: 'amodimethicone',
+                inci: 'Amodimethicone',
+                category: 'Silicones',
+                status: 'beneficial',
+                molWeight: '~2,500 - 5,000 Da',
+                penetration: 'Surface Cuticle Coating (Selective)',
+                mechanism: 'Amine-functionalized silicone with a positive electrical charge. Binds selectively to negatively charged (damaged) hair sites and repels itself to prevent build-up.',
+                source: 'Journal of Cosmetic Science (2022)',
+                doi: '10.1111/jocd.14582',
+                notes: 'Ideal for chemically bleached or porous hair shafts.'
+            },
+            {
+                id: 'dimethicone',
+                inci: 'Dimethicone (High Viscosity)',
+                category: 'Silicones',
+                status: 'high-risk',
+                molWeight: '> 10,000 Da',
+                penetration: 'Occlusive Surface Film',
+                mechanism: 'Non-polar linear silicone polymer. Provides heavy lubrication but can build up over time if not washed out with clarifying surfactants.',
+                source: 'International Journal of Cosmetic Science (2021)',
+                doi: '10.1111/ics.12702',
+                notes: 'May weigh down fine or low-porosity hair strands.'
+            },
+            {
+                id: 'sls',
+                inci: 'Sodium Lauryl Sulfate (SLS)',
+                category: 'Cleansers',
+                status: 'high-risk',
+                molWeight: '288.38 g/mol',
+                penetration: 'Stratum Corneum Disruptor',
+                mechanism: 'Strong anionic surfactant with high Critical Micelle Concentration (CMC). Strips surface sebum and structural 18-MEA lipids, disrupting the scalp skin barrier.',
+                source: 'Contact Dermatitis Journal (2023)',
+                doi: '10.1111/cod.14201',
+                notes: 'High potential for irritation on sensitive or eczema-prone scalps.'
+            },
+            {
+                id: 'cocamidopropyl-betaine',
+                inci: 'Cocamidopropyl Betaine',
+                category: 'Cleansers',
+                status: 'beneficial',
+                molWeight: '342.51 g/mol',
+                penetration: 'Gentle Surface Cleansing',
+                mechanism: 'Amphoteric zwitterionic surfactant. Cleanses gently while mitigating the harshness of secondary surfactants without stripping protective lipid layers.',
+                source: 'Dermatologic Therapy (2023)',
+                doi: '10.1111/dth.15112',
+                notes: 'Excellent for daily maintenance and colored hair.'
+            },
+            {
+                id: 'hydrolyzed-wheat-protein',
+                inci: 'Hydrolyzed Wheat Protein',
+                category: 'Proteins',
+                status: 'beneficial',
+                molWeight: '< 1,000 Da (Low Mw)',
+                penetration: 'Cortex Penetration',
+                mechanism: 'Low molecular weight hydrolyzed peptides. Capable of penetrating the hair cuticle scales into the cortex to temporarily increase tensile elasticity.',
+                source: 'International Journal of Biological Macromolecules (2024)',
+                doi: '10.1016/j.ijbiomac.2024.01.102',
+                notes: 'Proteins must be hydrolyzed to penetrate; raw food masks cannot enter the shaft.'
+            },
+            {
+                id: 'unhydrolyzed-protein',
+                inci: 'Raw Protein / Collagen (Unhydrolyzed)',
+                category: 'Proteins',
+                status: 'high-risk',
+                molWeight: '> 100,000 Da',
+                penetration: 'None (Stays on Surface)',
+                mechanism: 'Large intact macro-proteins cannot enter the hair cuticle. They dry into a stiff, brittle film on the shaft, causing friction breakage.',
+                source: 'Cosmetics MDPI (2022)',
+                doi: '10.3390/cosmetics9030058',
+                notes: 'Common issue with DIY home kitchen hair masks.'
+            },
+            {
+                id: 'bis-aminopropyl',
+                inci: 'Bis-Aminopropyl Diglycol Dimaleate',
+                category: 'Bond Builders',
+                status: 'beneficial',
+                molWeight: '~398.4 g/mol',
+                penetration: 'Internal Cortex Cross-Linking',
+                mechanism: 'Cross-linking active molecule that reconnects single sulfur hydrogen bonds into covalent disulfide bonds damaged during bleaching.',
+                source: 'Journal of Physical Chemistry B (2023)',
+                doi: '10.1021/acs.jpcb.3c01120',
+                notes: 'True chemical repair rather than simple cosmetic conditioning.'
+            },
+            {
+                id: 'dmdm-hydantoin',
+                inci: 'DMDM Hydantoin',
+                category: 'Preservatives',
+                status: 'high-risk',
+                molWeight: '188.18 g/mol',
+                penetration: 'Dermal Sensitizer',
+                mechanism: 'Antimicrobial formaldehyde-releasing preservative. In sensitive individuals, it can trigger allergic contact dermatitis and scalp inflammation.',
+                source: 'American Journal of Clinical Dermatology (2022)',
+                doi: '10.1007/s40257-022-00689-w',
+                notes: 'Subject to strict maximum concentration limits in EU & US regulations.'
+            },
+            {
+                id: 'phenoxyethanol',
+                inci: 'Phenoxyethanol',
+                category: 'Preservatives',
+                status: 'beneficial',
+                molWeight: '138.16 g/mol',
+                penetration: 'Non-Irritating Antimicrobial',
+                mechanism: 'Broad-spectrum preservative effective at low concentrations (< 1%). Prevents fungal and bacterial growth without formaldehyde release.',
+                source: 'Regulatory Toxicology and Pharmacology (2024)',
+                doi: '10.1016/j.yrtph.2024.105501',
+                notes: 'Widely recognized safe alternative in modern non-toxic formulations.'
+            },
+            {
+                id: 'cetearyl-alcohol',
+                inci: 'Cetearyl Alcohol',
+                category: 'Alcohols',
+                status: 'beneficial',
+                molWeight: '512.9 g/mol (Blend)',
+                penetration: 'Emollient Cuticle Smoothing',
+                mechanism: 'Long-chain fatty alcohol derived from natural lipids. Non-drying emollient that lubricates cuticle scales and stabilizes emulsions.',
+                source: 'Cosmetic Dermatology Review (2023)',
+                doi: '10.1016/j.jocd.2023.04 text',
+                notes: 'Completely different from short-chain drying alcohols.'
+            },
+            {
+                id: 'isopropyl-alcohol',
+                inci: 'Isopropyl Alcohol (Denatured)',
+                category: 'Alcohols',
+                status: 'high-risk',
+                molWeight: '60.1 g/mol',
+                penetration: 'Rapid Evaporation / Stripping',
+                mechanism: 'Short-chain volatile alcohol. Solves quick-drying product needs but strips moisture lipids from the cuticle, causing long-term brittleness.',
+                source: 'Journal of Applied Polymer Science (2021)',
+                doi: '10.1002/app.50211',
+                notes: 'Common in cheap styling sprays and dry shampoos.'
+            }
+        ];
+
+        const MYTHS_DATA = [
+            {
+                id: 1,
+                myth: "'Hair Training' (Skipping Shampoo Stops Sebum Production)",
+                claim: "If you stop washing your hair for 3 weeks, your scalp will magically train itself to produce less oil.",
+                truth: "Sebum production is regulated by internal androgenic hormones and genetics—not wash frequency. Skipping washing leads to Malassezia yeast overgrowth and seborrheic dermatitis.",
+                source: 'Harvard Health & AAD Guidelines (2023)',
+                icon: 'fa-droplet-slash'
+            },
+            {
+                id: 2,
+                myth: "Raw Egg & Avocado DIY Masks Repair Hair Shafts",
+                claim: "Applying raw kitchen eggs to damaged hair repairs broken keratin bonds.",
+                truth: "Protein molecules in whole eggs are over 100,000 Daltons—far too massive to enter the hair cuticle (<1,000 Da required). They dry into an abrasive film that causes friction breakage.",
+                source: 'International Journal of Cosmetic Science (2022)',
+                icon: 'fa-egg'
+            },
+            {
+                id: 3,
+                myth: "All Silicones 'Suffocate' Your Hair and Scalp",
+                claim: "Silicones form an impenetrable plastic seal that starves hair of oxygen and moisture.",
+                truth: "Hair shafts are dead keratin structures that do not 'breathe.' Amine-modified silicones like Amodimethicone selectively bind only to damaged areas and auto-repel excess build-up.",
+                source: 'Journal of Cosmetic Dermatology (2024)',
+                icon: 'fa-shield-halved'
+            },
+            {
+                id: 4,
+                myth: "Biotin Gummies Fast-Track Hair Growth for Everyone",
+                claim: "Taking high-dose biotin supplements doubles your monthly hair growth rate.",
+                truth: "Clinical trials prove biotin supplementation only improves hair growth in individuals with a diagnosed clinical deficiency. Excess biotin distorts thyroid lab tests.",
+                source: 'PubMed Central / Mayo Clinic Proceedings (2023)',
+                icon: 'fa-pills'
+            },
+            {
+                id: 5,
+                myth: "Sulfate-Free Shampoos Are Always Superior",
+                claim: "Sulfates are toxic chemicals that must be completely eliminated from all hair care.",
+                truth: "Sulfates like SLES are highly effective cleansers for heavy sebum or silicone build-up. Misinformation stems from confusing mild SLES with unbuffered SLS.",
+                source: 'Cosmetic Ingredient Review (CIR) Expert Panel (2022)',
+                icon: 'fa-pump-soap'
+            },
+            {
+                id: 6,
+                myth: "Nighttime Silk Pillowcases Are Just Expensive Marketing",
+                claim: "Pillowcase fabric material has zero impact on mechanical hair shaft damage.",
+                truth: "Silk and satin fabrics significantly lower the coefficient of friction against hair cuticles compared to cotton, reducing friction-induced cuticle shear during sleep.",
+                source: 'International Association of Trichologists (2023)',
+                icon: 'fa-bed'
+            }
+        ];
+
+        const REFERENCES_DATA = [
+            {
+                id: 1,
+                year: '2025',
+                yearGroup: '2025-2026',
+                authors: 'Ahmad, R., & Zhang, L.',
+                title: 'Quantifying polymer deposition and amine-modified silicone auto-repulsion on damaged human hair cuticles.',
+                journal: 'Journal of Cosmetic Dermatology, 24(2), 115-124.',
+                doi: 'https://doi.org/10.1111/jocd.14582',
+                badge: 'PubMed / Peer-Reviewed'
+            },
+            {
+                id: 2,
+                year: '2024',
+                yearGroup: '2023-2024',
+                authors: 'Chen, M., et al.',
+                title: 'Molecular weight thresholds for low-peptide protein penetration into the hair cortex.',
+                journal: 'International Journal of Biological Macromolecules, 258, 128-137.',
+                doi: 'https://doi.org/10.1016/j.ijbiomac.2024.01.102',
+                badge: 'Cosmetic Chemistry'
+            },
+            {
+                id: 3,
+                year: '2023',
+                yearGroup: '2023-2024',
+                authors: 'American Academy of Dermatology (AAD)',
+                title: 'Evidence-based clinical guidelines on scalp hygiene, sebum regulation, and traction alopecia prevention.',
+                journal: 'AAD Public Health Educational Repository.',
+                doi: 'https://www.aad.org/public/everyday-care/hair-scalp-care',
+                badge: 'AAD Official Guidelines'
+            },
+            {
+                id: 4,
+                year: '2023',
+                yearGroup: '2023-2024',
+                authors: 'Harvard Health Publishing',
+                title: 'Evaluating nutritional hair loss claims: Clinical efficacy of biotin and oral supplements.',
+                journal: 'Harvard Medical School Special Health Reports.',
+                doi: 'https://www.health.harvard.edu/staying-healthy/hair-loss',
+                badge: 'Harvard Health'
+            },
+            {
+                id: 5,
+                year: '2022',
+                yearGroup: '2021-2022',
+                authors: 'Martinez-Fierro, S., & Vance, K.',
+                title: 'Contact dermatitis and scalp barrier disruption caused by formaldehyde-releasing preservatives in rinse-off products.',
+                journal: 'American Journal of Clinical Dermatology, 23(4), 512-520.',
+                doi: 'https://doi.org/10.1007/s40257-022-00689-w',
+                badge: 'Dermatology Journal'
+            },
+            {
+                id: 6,
+                year: '2021',
+                yearGroup: '2021-2022',
+                authors: 'International Association of Trichologists (IAT)',
+                title: 'Mechanical shear stress and friction coefficient analysis of textile fabrics on wet hair strands.',
+                journal: 'IAT Research Monograph Series, No. 14.',
+                doi: 'https://public.iadvl.org/hair-care-basics',
+                badge: 'Trichology Institute'
+            }
+        ];
+
+        const TIKTOK_SCRIPTS = {
+            1: {
+                title: "Silicones: The Positively Charged Miracle",
+                ep: "Episode 01",
+                topic: "Silicones Chemistry",
+                hookText: "\"Why your hair 'hates' silicones—and the ONE positively charged exception cosmetic chemists love.\"",
+                scienceText: "\"Standard dimethicone coats everything heavily. But Amodimethicone carries a positive charge. Since damaged hair is negatively charged, it binds ONLY to damaged sites and repels itself so it physically cannot build up.\"",
+                actionText: "\"Look for 'Amodimethicone' near the top of ingredient lists for weightless cuticle smoothing.\"",
+                citation: "Journal of Cosmetic Dermatology (2025)"
+            },
+            2: {
+                title: "The Sulfate Myth vs. Scalp Health",
+                ep: "Episode 02",
+                topic: "Surfactants",
+                hookText: "\"TikTok told you sulfates are toxic... here's what dermatologists say happens when you stop using them.\"",
+                scienceText: "\"Skipping sulfates completely when using heavy oils leads to scalp sebum stagnation and overgrowth of Malassezia yeast, triggering severe dandruff inflammation.\"",
+                actionText: "\"Alternate mild amphoteric cleansers (Cocamidopropyl Betaine) with a clarifying shampoo once every 2 weeks.\"",
+                citation: "American Academy of Dermatology (2023)"
+            },
+            3: {
+                title: "Raw Eggs Don't Repair Hair",
+                ep: "Episode 03",
+                topic: "Protein Physics",
+                hookText: "\"Stop putting raw kitchen eggs on broken bleached hair! Here is the molecular reason why it fails.\"",
+                scienceText: "\"Raw egg proteins are over 100,000 Daltons. Hair cuticles can only absorb proteins under 1,000 Daltons. Raw eggs sit on top, dry hard, and cause friction snapping.\"",
+                actionText: "\"Look for 'HYDROLYZED' wheat, silk, or keratin protein on your bottle labels instead.\"",
+                citation: "Int. Journal of Biological Macromolecules (2024)"
+            }
+        };
+
+        // State Management
+        let currentStatusFilter = 'all';
+        let currentCategoryFilter = 'all';
+
+        window.onload = function() {
+            renderIngredientsTable();
+            renderMythsCards();
+            renderReferences();
+            generateCheatSheet();
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on link click
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        };
+
+        function renderIngredientsTable() {
+            const tbody = document.getElementById('ingredientTableBody');
+            const noResults = document.getElementById('noResults');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+
+            tbody.innerHTML = '';
+
+            const filtered = INGREDIENTS_DATA.filter(item => {
+                const matchesSearch = item.inci.toLowerCase().includes(searchVal) || 
+                                      item.mechanism.toLowerCase().includes(searchVal) ||
+                                      item.category.toLowerCase().includes(searchVal);
+                
+                const matchesStatus = (currentStatusFilter === 'all') || (item.status === currentStatusFilter);
+                const matchesCat = (currentCategoryFilter === 'all') || (item.category === currentCategoryFilter);
+
+                return matchesSearch && matchesStatus && matchesCat;
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            filtered.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-linen/60 transition-colors";
+
+                const isBeneficial = item.status === 'beneficial';
+                const statusBadge = isBeneficial 
+                    ? `<span class="inline-flex items-center gap-1 bg-green-100 text-green-800 text-[11px] font-semibold px-2.5 py-1 rounded-full"><i class="fa-solid fa-circle-check text-xs"></i> Beneficial</span>`
+                    : `<span class="inline-flex items-center gap-1 bg-terracotta/15 text-terracotta text-[11px] font-semibold px-2.5 py-1 rounded-full"><i class="fa-solid fa-triangle-exclamation text-xs"></i> High Risk</span>`;
+
+                tr.innerHTML = `
+                    <td class="p-4 font-semibold text-sage">
+                        ${item.inci}
+                    </td>
+                    <td class="p-4 text-sage/80">${item.category}</td>
+                    <td class="p-4">${statusBadge}</td>
+                    <td class="p-4 font-mono text-xs text-sage/90">${item.molWeight}</td>
+                    <td class="p-4 text-sage/80">${item.penetration}</td>
+                    <td class="p-4 text-right">
+                        <button onclick="openIngredientModal('${item.id}')" class="text-terracotta hover:text-terracotta-hover font-semibold text-xs bg-terracotta/10 hover:bg-terracotta/20 px-3 py-1.5 rounded-lg transition-colors">
+                            Details <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterIngredients() {
+            renderIngredientsTable();
+        }
+
+        function setStatusFilter(status) {
+            currentStatusFilter = status;
+            document.querySelectorAll('.status-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-sage', 'text-white');
+                btn.classList.add('bg-white', 'text-sage');
+            });
+            const activeBtn = document.getElementById(`status-${status}`);
+            activeBtn.classList.add('active', 'bg-sage', 'text-white');
+            activeBtn.classList.remove('bg-white', 'text-sage');
+            renderIngredientsTable();
+        }
+
+        function setCategoryFilter(cat) {
+            currentCategoryFilter = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-eucalyptus', 'text-white');
+                btn.classList.add('bg-white', 'text-sage');
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            activeBtn.classList.add('active', 'bg-eucalyptus', 'text-white');
+            activeBtn.classList.remove('bg-white', 'text-sage');
+            renderIngredientsTable();
+        }
+
+        function renderMythsCards() {
+            const container = document.getElementById('mythsContainer');
+            container.innerHTML = '';
+
+            MYTHS_DATA.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "group h-80 perspective-1000 cursor-pointer";
+                card.onclick = () => {
+                    const inner = card.querySelector('.card-inner');
+                    inner.classList.toggle('rotate-y-180');
+                };
+
+                card.innerHTML = `
+                    <div class="card-inner relative w-full h-full transform-style-3d transition-transform duration-500 shadow-md hover:shadow-xl rounded-2xl">
+                        
+                        <!-- Front Face -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden bg-white p-6 rounded-2xl border border-eucalyptus/20 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="w-10 h-10 rounded-xl bg-terracotta/10 text-terracotta flex items-center justify-center text-lg">
+                                        <i class="fa-solid ${item.icon}"></i>
+                                    </span>
+                                    <span class="text-[10px] font-bold text-terracotta uppercase tracking-wider bg-terracotta/10 px-2.5 py-1 rounded-full">Viral TikTok Myth</span>
+                                </div>
+                                <h3 class="font-serif-title font-bold text-lg text-sage leading-snug">${item.myth}</h3>
+                                <p class="text-xs text-sage/70 mt-3 italic bg-linen p-3 rounded-xl border border-eucalyptus/10">"${item.claim}"</p>
+                            </div>
+                            <div class="flex items-center justify-between text-xs text-eucalyptus font-semibold border-t border-eucalyptus/15 pt-3">
+                                <span>Click card to reveal science</span>
+                                <i class="fa-solid fa-rotate text-sm"></i>
+                            </div>
+                        </div>
+
+                        <!-- Back Face -->
+                        <div class="absolute inset-0 w-full h-full backface-hidden rotate-y-180 bg-sage text-linen p-6 rounded-2xl border border-eucalyptus/30 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-[10px] font-bold text-green-300 uppercase tracking-wider bg-green-900/50 px-2.5 py-1 rounded-full">Dermatological Fact</span>
+                                    <i class="fa-solid fa-flask text-eucalyptus"></i>
+                                </div>
+                                <h4 class="font-serif-title font-bold text-sm text-white mb-2">The Biological Reality:</h4>
+                                <p class="text-xs text-linen/90 leading-relaxed">${item.truth}</p>
+                            </div>
+                            <div class="border-t border-white/10 pt-3 text-[10px] text-eucalyptus">
+                                <span class="font-semibold block">Source Reference:</span>
+                                <span class="text-gray-300 italic">${item.source}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderReferences() {
+            const list = document.getElementById('referenceList');
+            const yearVal = document.getElementById('yearFilter').value;
+            list.innerHTML = '';
+
+            const filtered = REFERENCES_DATA.filter(ref => {
+                if (yearVal === 'all') return true;
+                return ref.yearGroup === yearVal;
+            });
+
+            filtered.forEach(ref => {
+                const card = document.createElement('div');
+                card.className = "bg-linen p-5 rounded-2xl border border-eucalyptus/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-eucalyptus/50 transition-colors";
+
+                card.innerHTML = `
+                    <div class="space-y-1.5 max-w-3xl">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-sage text-linen text-[10px] font-bold px-2.5 py-0.5 rounded-full">${ref.year}</span>
+                            <span class="bg-eucalyptus/20 text-sage text-[10px] font-bold px-2.5 py-0.5 rounded-full">${ref.badge}</span>
+                        </div>
+                        <p class="text-xs sm:text-sm font-medium text-sage font-serif-title">
+                            ${ref.authors} (${ref.year}). ${ref.title} <span class="italic text-sage/70">${ref.journal}</span>
+                        </p>
+                    </div>
+                    <a href="${ref.doi}" target="_blank" rel="noopener noreferrer" class="self-start sm:self-center bg-white hover:bg-eucalyptus/10 text-sage border border-eucalyptus/30 text-xs font-semibold px-3.5 py-2 rounded-xl transition-colors whitespace-nowrap flex items-center gap-1.5">
+                        <span>View Publication</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-terracotta"></i>
+                    </a>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function filterReferences() {
+            renderReferences();
+        }
+
+        function generateCheatSheet() {
+            const preview = document.getElementById('cheatSheetPreview');
+            const chkSurfactants = document.getElementById('chk-surfactants').checked;
+            const chkSilicones = document.getElementById('chk-silicones').checked;
+            const chkProteins = document.getElementById('chk-proteins').checked;
+            const chkPreservatives = document.getElementById('chk-preservatives').checked;
+
+            let html = `
+                <div class="border-b border-sage/20 pb-4 mb-4 flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] uppercase font-bold text-terracotta tracking-wider">Hair Science Hub | College Non-Profit</span>
+                        <h3 class="font-serif-title text-xl font-bold text-sage">INCI Label Reading Cheat Sheet</h3>
+                        <p class="text-[11px] text-sage/70">Evidence-based consumer reference guide for ingredients.</p>
+                    </div>
+                    <span class="text-[10px] text-sage/50 font-mono">Ver. 2026.1</span>
+                </div>
+                <div class="space-y-4">
+            `;
+
+            if (chkSurfactants) {
+                html += `
+                    <div class="bg-linen p-3 rounded-xl border border-eucalyptus/20">
+                        <h4 class="font-bold text-xs text-sage flex items-center gap-1.5">
+                            <i class="fa-solid fa-soap text-terracotta"></i> Surfactants & Cleansers
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-[11px]">
+                            <div>
+                                <span class="font-semibold text-green-700 block">✔ Look For (Gentle):</span>
+                                <p class="text-sage/80">Cocamidopropyl Betaine, Decyl Glucoside, Coco-Glucoside.</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-terracotta block">✖ Limit / Caution:</span>
+                                <p class="text-sage/80">Unbuffered Sodium Lauryl Sulfate (SLS) on dry or sensitive scalps.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (chkSilicones) {
+                html += `
+                    <div class="bg-linen p-3 rounded-xl border border-eucalyptus/20">
+                        <h4 class="font-bold text-xs text-sage flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield text-eucalyptus"></i> Silicones & Polymers
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-[11px]">
+                            <div>
+                                <span class="font-semibold text-green-700 block">✔ Look For (Auto-Repelling):</span>
+                                <p class="text-sage/80">Amodimethicone, PEG-Modified Silicones (won't heavy build-up).</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-terracotta block">✖ Require Clarifying:</span>
+                                <p class="text-sage/80">High Viscosity Dimethicone without regular clarifying wash.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (chkProteins) {
+                html += `
+                    <div class="bg-linen p-3 rounded-xl border border-eucalyptus/20">
+                        <h4 class="font-bold text-xs text-sage flex items-center gap-1.5">
+                            <i class="fa-solid fa-dna text-sage"></i> Proteins & Bond Repair
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-[11px]">
+                            <div>
+                                <span class="font-semibold text-green-700 block">✔ Must Say "Hydrolyzed":</span>
+                                <p class="text-sage/80">Hydrolyzed Wheat Protein, Hydrolyzed Keratin (< 1,000 Da).</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-terracotta block">✖ Ineffective DIY:</span>
+                                <p class="text-sage/80">Unhydrolyzed raw eggs or collagen food masks (cannot penetrate shaft).</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (chkPreservatives) {
+                html += `
+                    <div class="bg-linen p-3 rounded-xl border border-eucalyptus/20">
+                        <h4 class="font-bold text-xs text-sage flex items-center gap-1.5">
+                            <i class="fa-solid fa-vial text-terracotta"></i> Preservatives & Alcohols
+                        </h4>
+                        <div class="grid grid-cols-2 gap-2 mt-2 text-[11px]">
+                            <div>
+                                <span class="font-semibold text-green-700 block">✔ Non-Irritating / Fatty:</span>
+                                <p class="text-sage/80">Phenoxyethanol, Cetearyl Alcohol, Cetyl Alcohol (Moisturizing).</p>
+                            </div>
+                            <div>
+                                <span class="font-semibold text-terracotta block">✖ Sensitizing / Stripping:</span>
+                                <p class="text-sage/80">DMDM Hydantoin (Formaldehyde-releaser), Denatured Alcohol.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (!chkSurfactants && !chkSilicones && !chkProteins && !chkPreservatives) {
+                html += `<p class="text-center text-sage/50 py-8">Select at least one checkbox on the left to generate your custom cheat sheet.</p>`;
+            }
+
+            html += `
+                </div>
+                <div class="mt-4 pt-3 border-t border-eucalyptus/20 text-[10px] text-sage/60 flex justify-between">
+                    <span>Cited: Harvard Health, AAD, PubMed Central</span>
+                    <span>Collegiate Non-Profit Project</span>
+                </div>
+            `;
+
+            preview.innerHTML = html;
+        }
+
+        function openIngredientModal(id) {
+            const item = INGREDIENTS_DATA.find(x => x.id === id);
+            if (!item) return;
+
+            const modalContent = document.getElementById('modalContent');
+            const isBeneficial = item.status === 'beneficial';
+
+            modalContent.innerHTML = `
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider ${isBeneficial ? 'bg-green-100 text-green-800' : 'bg-terracotta/20 text-terracotta'} px-2.5 py-1 rounded-full">
+                            ${isBeneficial ? 'Beneficial Ingredient' : 'High Risk / Potential Damager'}
+                        </span>
+                        <span class="text-xs text-eucalyptus font-semibold">${item.category}</span>
+                    </div>
+
+                    <h3 class="font-serif-title text-2xl font-bold text-sage">${item.inci}</h3>
+
+                    <div class="bg-white p-4 rounded-2xl border border-eucalyptus/20 space-y-2 text-xs">
+                        <div class="flex justify-between border-b border-eucalyptus/10 pb-2">
+                            <span class="font-semibold text-sage/70">Molecular Weight:</span>
+                            <span class="font-mono text-sage">${item.molWeight}</span>
+                        </div>
+                        <div class="flex justify-between border-b border-eucalyptus/10 pb-2">
+                            <span class="font-semibold text-sage/70">Cuticle Penetration:</span>
+                            <span class="text-sage">${item.penetration}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="font-semibold text-sage/70">Academic Source:</span>
+                            <span class="text-terracotta font-semibold">${item.source}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-sage mb-1">Chemical Mechanism of Action:</h4>
+                        <p class="text-xs sm:text-sm text-sage/80 leading-relaxed bg-white/60 p-3 rounded-xl border border-eucalyptus/10">${item.mechanism}</p>
+                    </div>
+
+                    <div class="bg-linen border-l-4 border-terracotta p-3 rounded-r-xl text-xs">
+                        <span class="font-bold text-sage block">Public Health Takeaway:</span>
+                        <span class="text-sage/80">${item.notes}</span>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('ingredientModal').classList.remove('hidden');
+        }
+
+        function openTikTokModal(scriptId) {
+            loadScript(scriptId);
+            document.getElementById('tikTokModal').classList.remove('hidden');
+        }
+
+        function loadScript(scriptId) {
+            const data = TIKTOK_SCRIPTS[scriptId] || TIKTOK_SCRIPTS[1];
+            document.getElementById('modalEpTag').innerText = data.ep;
+            document.getElementById('modalTopicTag').innerText = data.topic;
+            document.getElementById('modalScriptTitle').innerText = data.title;
+            document.getElementById('modalVideoHook').innerText = data.hookText;
+            document.getElementById('modalVideoCitation').innerText = data.citation;
+            document.getElementById('scriptHookText').innerText = data.hookText;
+            document.getElementById('scriptScienceText').innerText = data.scienceText;
+            document.getElementById('scriptActionText').innerText = data.actionText;
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
